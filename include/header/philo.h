@@ -12,6 +12,7 @@
 	t_data	*data;
 	t_philo	*philos;
 	int		stop;
+
 }	t_monitor; */
 
 typedef struct s_data
