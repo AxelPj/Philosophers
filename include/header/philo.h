@@ -35,9 +35,9 @@ typedef struct s_philo
 typedef struct s_monitor
 {
 	pthread_t		thread_id;
-	t_data	*data;
-	t_philo	*philo;
-	int		stop;
+	t_data			*data;
+	t_philo			*philo;
+	int				stop;
 }	t_monitor;
 //----------------Utils------------------//
 char		*ft_itoa(int n);
@@ -47,10 +47,12 @@ int			verif_nb(char *av);
 int			ft_atoi(const char *str);
 int			verif_arg(char *av1, char *av2, char *av3, char *av4);
 t_philo 	*init_philo(t_data *data, t_philo *philos);
+t_monitor	*init_monitor(t_data *data, t_philo *philo, t_monitor *monitor);
 t_data		*init_data (char *nb_ph, char *time_to_die, char *time_to_sleep, char *time_to_eat);
 //-------------------thread--------//
 void		*thread_routine(void *arg);
 void		philo_eat(t_philo *philo);
 void		philo_write(t_philo *philo, int bool);
+void		*supervisor_routine(void *arg);
 long long	get_time();
 #endif

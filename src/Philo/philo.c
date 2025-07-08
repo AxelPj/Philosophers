@@ -6,7 +6,7 @@
 /*   By: axelpeti <axelpeti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/04 15:19:46 by axelpeti          #+#    #+#             */
-/*   Updated: 2025/07/08 18:50:35 by axelpeti         ###   ########.fr       */
+/*   Updated: 2025/07/09 00:34:56 by axelpeti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,14 @@
 void	*thread_routine(void *arg)
 {
 	t_philo *philo;
-	long long time_count;
 
-	time_count = 0;
 	philo = (t_philo *)arg;
 	if (philo->id % 2 != 0)
 		usleep(1000);
 	pthread_mutex_lock(&philo->data->time);
 	philo->start = get_time();
 	pthread_mutex_unlock(&philo->data->time);
-	while (time_count <= philo->data->time_to_die)
+	while (philo->start < philo->data->time_to_die)
 	{
 		philo_write(philo, 1);
 		philo_eat(philo);
@@ -34,8 +32,9 @@ void	*thread_routine(void *arg)
 		usleep(philo->data->time_to_sleep * 1000);
 		pthread_mutex_lock(&philo->data->time);
 		philo->end = get_time();
-		time_count = philo->start - philo->end;
-		time_count -= philo->last_time_to_eat;
+ 		/*time_count = philo->start - philo->end; */
+		philo->start = philo->end - philo->last_time_to_eat;
+ 		printf("\n\n\n\n%lld\n\n\n\n", philo->start);
 		pthread_mutex_unlock(&philo->data->time);
 	}
 	philo_write(philo, 4);
@@ -83,15 +82,29 @@ void	*supervisor_routine(void *arg)
 	t_monitor *monitor;
 	int i;
 
-	i = 1;
-	monitor = (t_philo *)arg;
-	while(monitor->philo[i]->last_time_to_eat < monitor->philo[i]->start - monitor->philo[i]->end)
+	monitor = (t_monitor *)arg;
+	usleep(10);
+	while(1)
 	{
-		i = 1
-		while (monitor->philo[i])
+		i = 0;
+		while (i < monitor->data->nb_philo)
 		{
-			
+			pthread_mutex_lock(&monitor->data->time);
+			if (monitor->data->time_to_die < monitor->philo[i].start)
+				monitor->stop = 1;
+			pthread_mutex_unlock(&monitor->data->time);
 			i++;
 		}
 	}
 }
+
+/* void	ft_usleep(long long time)
+{
+	time /
+
+	while(i < time)
+	{
+		usleep()
+		i + 1000;
+	}
+} */

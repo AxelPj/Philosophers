@@ -6,7 +6,7 @@
 /*   By: axelpeti <axelpeti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/04 14:46:34 by axelpeti          #+#    #+#             */
-/*   Updated: 2025/07/08 18:51:26 by axelpeti         ###   ########.fr       */
+/*   Updated: 2025/07/09 00:11:51 by axelpeti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,5 +50,9 @@ t_philo *init_philo(t_data *data, t_philo *philos)
 
 t_monitor	*init_monitor(t_data *data, t_philo *philo, t_monitor *monitor)
 {
-	t_
+	monitor = malloc(sizeof(t_monitor));
+	monitor->philo = philo;
+	monitor->data = data;
+	monitor->stop = 0;
+	return (monitor);
 }
