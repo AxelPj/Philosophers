@@ -6,7 +6,7 @@
 /*   By: axelpeti <axelpeti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/04 14:46:34 by axelpeti          #+#    #+#             */
-/*   Updated: 2025/07/06 18:03:01 by axelpeti         ###   ########.fr       */
+/*   Updated: 2025/07/08 18:51:26 by axelpeti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ t_data *init_data (char *nb_ph, char *time_to_die, char *time_to_sleep, char *ti
 	t_data *data;
 
 	data = malloc(sizeof(t_data));
-	data->dead_count = ft_atoi(time_to_die);
+	data->time_to_die = ft_atoi(time_to_die);
 	data->nb_philo = ft_atoi(nb_ph);
 	data->time_to_sleep = ft_atoi(time_to_sleep);
 	data->time_to_eat = ft_atoi(time_to_eat);
@@ -32,8 +32,11 @@ t_philo *init_philo(t_data *data, t_philo *philos)
 	{
 		philos[i].id = i + 1;
 		philos[i].last_time_to_eat = 0;
+		philos[i].nb_food = 0;
 		philos[i].data = data;
 		pthread_mutex_init(&philos[i].left_fork, NULL);
+		pthread_mutex_init(&data->time, NULL);
+		pthread_mutex_init(&data->write, NULL);
 		i++;
 	}
 	i = 0;
@@ -43,4 +46,9 @@ t_philo *init_philo(t_data *data, t_philo *philos)
 		i++;	
 	}
 	return (philos);
+}
+
+t_monitor	*init_monitor(t_data *data, t_philo *philo, t_monitor *monitor)
+{
+	t_
 }

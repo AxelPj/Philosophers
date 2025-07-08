@@ -6,7 +6,7 @@
 /*   By: axelpeti <axelpeti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/04 17:42:57 by axelpeti          #+#    #+#             */
-/*   Updated: 2025/07/06 15:18:03 by axelpeti         ###   ########.fr       */
+/*   Updated: 2025/07/08 16:45:35 by axelpeti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,10 +57,12 @@ int	ft_atoi(const char *str)
 	return (result * sign);
 }
 
-/* get_time(t_data *data)
+long long	get_time()
 {
-	struct timeval tv;
+	struct timeval	tv;
+	long long		time;
 	
     gettimeofday(&tv, NULL);
-	
-} */
+	time = (tv.tv_sec * 1000) + (tv.tv_usec / 1000);
+	return (time);
+}

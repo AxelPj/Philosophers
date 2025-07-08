@@ -6,7 +6,7 @@
 #    By: axelpeti <axelpeti@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/25 14:45:18 by axelpeti          #+#    #+#              #
-#    Updated: 2025/07/04 18:41:43 by axelpeti         ###   ########.fr        #
+#    Updated: 2025/07/08 11:38:14 by axelpeti         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,7 @@ OBJS = $(SRCS:%.c=$(BUILD_DIR)/%.o)
 
 # Compilateur et options
 CC = cc
-CFLAGS   = -Wall -Wextra -Werror
+CFLAGS   = -Wall -Wextra -Werror -g
 CPPFLAGS = -Iinclude/header
 
 # Couleurs pour affichage

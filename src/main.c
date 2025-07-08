@@ -6,7 +6,7 @@
 /*   By: axelpeti <axelpeti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/04 14:38:47 by axelpeti          #+#    #+#             */
-/*   Updated: 2025/07/06 17:51:14 by axelpeti         ###   ########.fr       */
+/*   Updated: 2025/07/08 14:50:46 by axelpeti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,18 +16,22 @@ int main (int ac, char **av)
 {
 	t_data	*data;
 	t_philo	*philos;
-	int i;
+ 	int i;
 
 	i = 0;
-	if (ac == 5 && (!verif_arg(av[1], av[2], av[3], av[4])))
+	get_time();
+	 if (ac == 5 && (!verif_arg(av[1], av[2], av[3], av[4])))
 	{
 		data = init_data(av[1], av[2], av[3], av[4]);
 		philos = malloc(sizeof(t_philo) * data->nb_philo);
 		philos = init_philo(data, philos);
-		while (i < data->nb_philo)
+		while (1)
 		{
-			pthread_create(&philos[i].thread_id, NULL, &thread_routine, &philos[i]);
-			i++;
+			while (i < data->nb_philo)
+			{
+				pthread_create(&philos[i].thread_id, NULL, &thread_routine, &philos[i]);
+				i++;
+			}
 		}
 	}
 	else
