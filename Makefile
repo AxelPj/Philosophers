@@ -6,12 +6,12 @@
 #    By: axelpeti <axelpeti@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/25 14:45:18 by axelpeti          #+#    #+#              #
-#    Updated: 2025/07/08 11:38:14 by axelpeti         ###   ########.fr        #
+#    Updated: 2025/07/12 20:34:32 by axelpeti         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 # Nom de l'exécutable
-NAME = Philosopher
+NAME = philo
 
 # Sources
 SRCS =  ./src/utils/utils.c ./src/utils/init_data.c \
