@@ -6,12 +6,11 @@
 /*   By: axelpeti <axelpeti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/04 17:42:57 by axelpeti          #+#    #+#             */
-/*   Updated: 2025/07/08 16:45:35 by axelpeti         ###   ########.fr       */
+/*   Updated: 2025/07/13 17:28:34 by axelpeti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-
 
 void	ft_putstr_fd(char *s, int fd)
 {
@@ -25,44 +24,45 @@ void	ft_putstr_fd(char *s, int fd)
 	}
 }
 
-
-int	ft_isdigit(int c)
-{
-	if (c >= 48 && c <= 57)
-		return (1);
-	return (0);
-}
-int	ft_atoi(const char *str)
-{
-	size_t	i;
-	int		result;
-	int		sign;
-
-	i = 0;
-	result = 0;
-	sign = 1;
-	while (str[i] == ' ' || (str[i] >= 9 && str[i] <= 13))
-		i++;
-	if (str[i] == '+' || str[i] == '-')
-	{
-		if (str[i] == '-')
-			sign = -sign;
-		i++;
-	}
-	while (str[i] >= '0' && str[i] <= '9')
-	{
-		result = (result * 10 + (str[i] - 48));
-		i++;
-	}
-	return (result * sign);
-}
-
-long long	get_time()
+long long	get_time(void)
 {
 	struct timeval	tv;
 	long long		time;
-	
-    gettimeofday(&tv, NULL);
-	time = (tv.tv_sec * 1000) + (tv.tv_usec / 1000);
+
+	gettimeofday(&tv, NULL);
+	time = (tv.tv_usec / 1000) + (tv.tv_sec * 1000);
 	return (time);
+}
+
+int	verif_stop(t_philo *philo)
+{
+	int	food;
+
+	pthread_mutex_lock(&philo->data->inspect_stop);
+	if (philo->data->stop == 1)
+	{
+		pthread_mutex_unlock(&philo->data->inspect_stop);
+		return (1);
+	}
+	pthread_mutex_unlock(&philo->data->inspect_stop);
+	pthread_mutex_lock(&philo->data->inspect_philo);
+	food = philo->nb_food;
+	pthread_mutex_unlock(&philo->data->inspect_philo);
+	pthread_mutex_lock(&philo->data->inspect_stop);
+	if (philo->data->stop == 1)
+	{
+		pthread_mutex_unlock(&philo->data->inspect_stop);
+		return (1);
+	}
+	pthread_mutex_unlock(&philo->data->inspect_stop);
+	return (0);
+}
+
+void	ft_sleep(long long milliseconds)
+{
+	long long	start;
+
+	start = get_time();
+	while ((get_time() - start) < milliseconds)
+		usleep(200);
 }

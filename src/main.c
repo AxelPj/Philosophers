@@ -6,7 +6,7 @@
 /*   By: axelpeti <axelpeti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/04 14:38:47 by axelpeti          #+#    #+#             */
-/*   Updated: 2025/07/12 23:31:34 by axelpeti         ###   ########.fr       */
+/*   Updated: 2025/07/13 17:26:03 by axelpeti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,8 @@ void	thread_run(t_data *data, t_philo *philos, t_monitor *monitor)
 	free(data);
 	free(philos);
 }
-int main(int ac, char **av)
+
+int	main(int ac, char **av)
 {
 	t_data		*data;
 	t_philo		*philos;
@@ -41,18 +42,19 @@ int main(int ac, char **av)
 	get_time();
 	if (ac == 5 && (!verif_arg(av[1], av[2], av[3], av[4])))
 	{
-		data = init_data(av[1], NULL);
+		data = init_data(av[1]);
 		philos = malloc(sizeof(t_philo) * data->nb_philo);
 		philos = init_philo(data, philos, av[3], av[4]);
-		monitor = init_monitor(data, philos, av[2]);
+		monitor = init_monitor(data, philos, av[2], NULL);
 		thread_run(data, philos, monitor);
 	}
-	else if (ac == 6 && (!verif_arg(av[1], av[2], av[3], av[4])) && (!verif_arg2(av[5])))
+	else if (ac == 6 && (!verif_arg(av[1], av[2], av[3], av[4]))
+		&& (!verif_arg2(av[5])))
 	{
-		data = init_data(av[1], av[5]);
+		data = init_data(av[1]);
 		philos = malloc(sizeof(t_philo) * data->nb_philo);
 		philos = init_philo(data, philos, av[3], av[4]);
-		monitor = init_monitor(data, philos, av[2]);
+		monitor = init_monitor(data, philos, av[2], av[5]);
 		thread_run(data, philos, monitor);
 	}
 	else

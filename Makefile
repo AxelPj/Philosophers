@@ -6,7 +6,7 @@
 #    By: axelpeti <axelpeti@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/25 14:45:18 by axelpeti          #+#    #+#              #
-#    Updated: 2025/07/12 20:34:32 by axelpeti         ###   ########.fr        #
+#    Updated: 2025/07/13 18:38:26 by axelpeti         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,9 +14,9 @@
 NAME = philo
 
 # Sources
-SRCS =  ./src/utils/utils.c ./src/utils/init_data.c \
-		./src/Philo/philo.c \
-		./src/parser/verif_nb.c \
+SRCS =  ./src/utils.c ./src/init_data.c \
+		./src/philo.c ./src/monitor.c\
+		./src/verif_nb.c \
 		./src/main.c \
 
 # Répertoires
