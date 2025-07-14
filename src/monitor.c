@@ -6,7 +6,7 @@
 /*   By: axelpeti <axelpeti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/13 17:18:03 by axelpeti          #+#    #+#             */
-/*   Updated: 2025/07/13 17:30:37 by axelpeti         ###   ########.fr       */
+/*   Updated: 2025/07/14 12:03:48 by axelpeti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ int	check_monitor_death(t_monitor *monitor)
 		pthread_mutex_lock(&monitor->data->inspect_philo);
 		time = monitor->philo[i].last_time_to_eat;
 		pthread_mutex_unlock(&monitor->data->inspect_philo);
-		if (monitor->time_to_die < (get_time() - time) + 1)
+		if (monitor->time_to_die < (get_time() - time))
 		{
 			philo_write(&monitor->philo[i], "Dead");
 			pthread_mutex_lock(&monitor->data->inspect_stop);

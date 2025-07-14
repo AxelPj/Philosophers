@@ -6,7 +6,7 @@
 /*   By: axelpeti <axelpeti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/04 15:19:46 by axelpeti          #+#    #+#             */
-/*   Updated: 2025/07/13 19:32:13 by axelpeti         ###   ########.fr       */
+/*   Updated: 2025/07/14 12:31:09 by axelpeti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,11 @@
 void	*thread_routine(void *arg)
 {
 	t_philo	*philo;
-	int	forks_taken;
+	int		forks_taken;
 
 	philo = (t_philo *)arg;
 	if (philo->id % 2 != 0)
-		ft_sleep(200);
+		ft_sleep(100);
 	while (1)
 	{
 		if (verif_stop(philo))
@@ -30,7 +30,7 @@ void	*thread_routine(void *arg)
 			break ;
 		forks_taken = taken_forks(philo);
 		if (!forks_taken)
-			continue ; // On repart de zéro si les forks n'ont pas été pris
+			break ;
 		if (philo_eat(philo))
 			break ;
 		if (philo_write(philo, "Sleeping"))
@@ -61,7 +61,6 @@ int	philo_eat(t_philo *philo)
 	return (0);
 }
 
-
 int	taken_forks(t_philo *philo)
 {
 	if (philo->id % 2 == 0)
@@ -91,7 +90,6 @@ int	taken_forks(t_philo *philo)
 	return (1);
 }
 
-
 int	philo_write(t_philo *philo, char *s)
 {
 	if (verif_stop(philo) == 1)
@@ -104,4 +102,24 @@ int	philo_write(t_philo *philo, char *s)
 		pthread_mutex_unlock(&philo->data->write);
 	}
 	return (0);
+}
+
+void	*one_thread(void *arg)
+{
+	t_philo	*philo;
+
+	philo = (t_philo *)arg;
+	philo_write(philo, "Thinking");
+	pthread_mutex_lock(philo->right_fork);
+	philo_write(philo, "has taken right fork");
+	pthread_mutex_unlock(philo->right_fork);
+	while (1)
+	{
+		if (philo->data->stop == 1)
+		{
+			philo_write(philo, "dead");
+			break ;
+		}
+	}
+	return (arg);
 }

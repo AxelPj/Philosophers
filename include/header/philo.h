@@ -6,7 +6,7 @@
 /*   By: axelpeti <axelpeti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/12 22:37:18 by axelpeti          #+#    #+#             */
-/*   Updated: 2025/07/13 19:32:49 by axelpeti         ###   ########.fr       */
+/*   Updated: 2025/07/14 12:22:14 by axelpeti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ int			philo_write(t_philo *philo, char *s);
 long long	get_time(void);
 int			verif_stop(t_philo *philo);
 void		ft_sleep(long long sleep);
+void		*one_thread(void *arg);
 //-------------------supervisor--------//
 int			check_monitor_death(t_monitor *monitor);
 void		*supervisor_routine(void *arg);
