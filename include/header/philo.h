@@ -6,7 +6,7 @@
 /*   By: axelpeti <axelpeti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/12 22:37:18 by axelpeti          #+#    #+#             */
-/*   Updated: 2025/07/14 12:22:14 by axelpeti         ###   ########.fr       */
+/*   Updated: 2025/07/14 12:39:15 by axelpeti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,8 @@
 
 typedef struct s_data
 {
-	int				nb_philo;
-	int				time_to_sleep;
-	int				time_to_eat;
 	int				stop;
+	int				nb_philo;
 	pthread_mutex_t	write;
 	pthread_mutex_t	inspect_data;
 	pthread_mutex_t	inspect_philo;
@@ -34,28 +32,27 @@ typedef struct s_data
 typedef struct s_philo
 {
 	pthread_t		thread_id;
-	long long		last_time_to_eat;
-	long long		start;
-	int				nb_food;
 	int				id;
+	int				nb_food;
+	t_data			*data;
 	int				time_to_sleep;
 	int				time_to_eat;
 	pthread_mutex_t	left_fork;
 	pthread_mutex_t	*right_fork;
-	t_data			*data;
-	int				dead;
+	long long		start;
+	long long		last_time_to_eat;
 }	t_philo;
 
 typedef struct s_monitor
 {
 	pthread_t		thread_id;
-	int				nb_philo;
 	int				max_food;
-	int				*tab;
-	t_data			*data;
-	int				time_to_die;
 	t_philo			*philo;
+	int				time_to_die;
+	t_data			*data;
+	int				nb_philo;
 	int				stop;
+	int				*tab;
 }	t_monitor;
 //----------------Utils------------------//
 char		*ft_itoa(int n);

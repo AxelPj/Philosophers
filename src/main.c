@@ -6,7 +6,7 @@
 /*   By: axelpeti <axelpeti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/04 14:38:47 by axelpeti          #+#    #+#             */
-/*   Updated: 2025/07/14 12:29:40 by axelpeti         ###   ########.fr       */
+/*   Updated: 2025/07/15 11:33:39 by axelpeti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,14 @@ void	thread_run(t_data *data, t_philo *philos, t_monitor *monitor)
 	int	i;
 
 	i = 0;
- 	if (data->nb_philo == 1)
+	if (data->nb_philo == 1)
 		pthread_create(&philos[i].thread_id, NULL, &one_thread, &philos[i]);
 	else
 	{
 		while (i < data->nb_philo)
 		{
-			pthread_create(&philos[i].thread_id, NULL, &thread_routine, &philos[i]);
+			pthread_create(&philos[i].thread_id, NULL, &thread_routine,
+				&philos[i]);
 			i++;
 		}
 	}
@@ -32,6 +33,7 @@ void	thread_run(t_data *data, t_philo *philos, t_monitor *monitor)
 	i = 0;
 	while (i < data->nb_philo)
 		pthread_join(philos[i++].thread_id, NULL);
+	free(monitor->tab);
 	free(monitor);
 	free(data);
 	free(philos);

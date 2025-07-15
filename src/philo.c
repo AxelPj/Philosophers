@@ -6,7 +6,7 @@
 /*   By: axelpeti <axelpeti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/04 15:19:46 by axelpeti          #+#    #+#             */
-/*   Updated: 2025/07/14 12:31:09 by axelpeti         ###   ########.fr       */
+/*   Updated: 2025/07/14 12:49:23 by axelpeti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 void	*thread_routine(void *arg)
 {
 	t_philo	*philo;
-	int		forks_taken;
 
 	philo = (t_philo *)arg;
 	if (philo->id % 2 != 0)
@@ -28,8 +27,7 @@ void	*thread_routine(void *arg)
 			break ;
 		if (verif_stop(philo))
 			break ;
-		forks_taken = taken_forks(philo);
-		if (!forks_taken)
+		if (!taken_forks(philo))
 			break ;
 		if (philo_eat(philo))
 			break ;
